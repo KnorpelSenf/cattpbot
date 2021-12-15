@@ -16,7 +16,7 @@ bot
     await ctx.reply("I can search for HTTP cat images inline.", {
       reply_markup: new InlineKeyboard()
         .switchInlineCurrent("Search here").row()
-        .switchInline("Share article"),
+        .switchInline("Share cat"),
     });
   });
 
