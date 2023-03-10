@@ -22,7 +22,7 @@ bot
 
 bot.on("inline_query", async (ctx) => {
   const query = ctx.inlineQuery.query;
-  const url = `https://http.cat/${query}.jpg`;
+  let url = `https://http.cat/${query}.jpg`;
   const res = await fetch(url, { method: "HEAD" });
   if (res.status === 200) {
     await ctx.answerInlineQuery([{
@@ -32,7 +32,13 @@ bot.on("inline_query", async (ctx) => {
       thumb_url: url,
     }]);
   } else {
-    await ctx.answerInlineQuery([]);
+    url = "https://http.cat/404.jpg";
+    await ctx.answerInlineQuery([{
+      type: "photo",
+      id: "404",
+      photo_url: url,
+      thumb_url: url,
+    }]);
   }
 });
 
