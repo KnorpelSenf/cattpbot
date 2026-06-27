@@ -1,9 +1,4 @@
-import {
-  Bot,
-  InlineKeyboard,
-  webhookCallback,
-} from "https://deno.land/x/grammy@v1.5.2/mod.ts";
-import { serve } from "https://deno.land/std@0.116.0/http/server.ts";
+import { Bot, InlineKeyboard, webhookCallback } from "grammy";
 
 const token = Deno.env.get("BOT_TOKEN");
 if (token === undefined) throw new Error("Missing BOT_TOKEN");
@@ -29,7 +24,7 @@ bot.on("inline_query", async (ctx) => {
       type: "photo",
       id: query,
       photo_url: url,
-      thumb_url: url,
+      thumbnail_url: url,
     }]);
   } else {
     url = "https://http.cat/404.jpg";
@@ -37,9 +32,9 @@ bot.on("inline_query", async (ctx) => {
       type: "photo",
       id: "404",
       photo_url: url,
-      thumb_url: url,
+      thumbnail_url: url,
     }]);
   }
 });
 
-serve(webhookCallback(bot, "std/http"));
+Deno.serve(webhookCallback(bot, "std/http"));
